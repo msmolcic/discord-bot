@@ -1,9 +1,9 @@
 import { InteractionResponseType, InteractionType } from 'discord-interactions';
 import 'dotenv/config';
 import express from 'express';
-import { hasGuildCommands, PLAY_COMMAND } from './commands';
-import { PLAY_COMMAND_NAME } from './constants';
-import { verifyDiscordRequest } from './util';
+import { hasGuildCommands, PLAY_COMMAND } from './commands.js';
+import { PLAY_COMMAND_NAME } from './constants.js';
+import { verifyDiscordRequest } from './util.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;

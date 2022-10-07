@@ -1,15 +1,15 @@
-import { PLAY_COMMAND_NAME } from './constants';
-import { discordRequest } from './util';
+import { PLAY_COMMAND_NAME } from './constants.js';
+import { discordRequest } from './util.js';
 
 export const hasGuildCommands = async (applicationId, guildId, commands) => {
   if (!guildId || !applicationId) return;
 
   commands.forEach((command) =>
-    hasGuildCommands(applicationId, guildId, command)
+    hasGuildCommand(applicationId, guildId, command)
   );
 };
 
-const hasGuildCommands = async (applicationId, guildId, command) => {
+const hasGuildCommand = async (applicationId, guildId, command) => {
   const endpoint = `applications/${applicationId}/guilds/${guildId}/commands`;
 
   try {
