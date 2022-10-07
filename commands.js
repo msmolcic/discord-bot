@@ -18,9 +18,14 @@ const hasGuildCommand = async (applicationId, guildId, command) => {
 
     if (!data) return;
 
+    console.log('Mapping command names...');
     const installedNames = data.map((cmd) => cmd.name);
 
-    if (installedNames.includes(command.name)) return;
+    console.log('Verifying existing commands...');
+    if (installedNames.includes(command.name)) {
+      console.log(`'${command.name}' command is already installed...`);
+      return;
+    }
 
     installGuildCommand(applicationId, guildId, command);
   } catch (error) {
@@ -32,8 +37,11 @@ export const installGuildCommand = async (applicationId, guildId, command) => {
   const endpoint = `applications/${applicationId}/guilds/${guildId}/commands`;
 
   try {
+    console.log(`Installing '${command.name}' command...`);
     await discordRequest(endpoint, { method: 'POST', body: command });
+    console.log(`'${command.name}' command successfully installed...`);
   } catch (error) {
+    console.log(`Failed to install '${command.name}' command...`);
     console.error(error);
   }
 };

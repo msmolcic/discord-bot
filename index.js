@@ -21,8 +21,11 @@ app.listen(PORT, () => {
 app.post('/interactions', async (request, response) => {
   const { type, id, data } = request.body;
 
+  console.log('Interaction started...');
+
   if (type === InteractionType.PING) {
-    return res.send({ type: InteractionResponseType.PONG });
+    console.log('Pong...');
+    return response.send({ type: InteractionResponseType.PONG });
   }
 
   if (type === InteractionType.APPLICATION_COMMAND) {
@@ -39,6 +42,8 @@ app.post('/interactions', async (request, response) => {
 });
 
 const handlePlayCommand = (response) => {
+  console.log('Replying to play command...');
+
   return response.send({
     type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
     data: {

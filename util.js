@@ -3,14 +3,14 @@ import fetch from 'node-fetch';
 import { verifyKey } from 'discord-interactions';
 
 export const verifyDiscordRequest = (clientKey) => {
-  return (req, res, buf, encoding) => {
-    const signature = req.get('X-Signature-Ed25519');
-    const timestamp = req.get('X-Signature-Timestamp');
+  return (request, response, buffer, encoding) => {
+    const signature = request.get('X-Signature-Ed25519');
+    const timestamp = request.get('X-Signature-Timestamp');
 
-    const isValidRequest = verifyKey(buf, signature, timestamp, clientKey);
+    const isValidRequest = verifyKey(buffer, signature, timestamp, clientKey);
 
     if (!isValidRequest) {
-      res.status(401).send('Bad request signature');
+      response.status(401).send('Bad request signature');
       throw new Error('Bad request signature');
     }
   };
