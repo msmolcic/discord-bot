@@ -25,6 +25,8 @@ export const discordRequest = async (endpoint, options) => {
     headers: {
       Authorization: `Bot ${process.env.TOKEN}`,
       'Content-Type': 'application/json; charset=UTF-8',
+      'User-Agent':
+        'DiscordBot (https://github.com/msmolcic/discord-bot, 1.0.0)',
     },
     ...options,
   });
